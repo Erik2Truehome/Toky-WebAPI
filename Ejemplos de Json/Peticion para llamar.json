@@ -1,0 +1,19 @@
+{
+	"agent":{
+		"idassignator":"misael@truehome.com.mx",
+		"email":"misael@truehome.com.mx",
+		"name":"Misael",
+		"lastname":"Monterroca"
+	},
+
+	"lead":{
+		"idassignator":"erik.cliente@gmail.com",
+		"email":"erik.cliente@gmail.com",
+		"name":"Erik",
+		"lastname":"Montes",
+		"telephone":{
+			"countrycode":"+52",
+			"number":"5530396748"
+		}
+	}
+}

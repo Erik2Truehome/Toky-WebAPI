@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using System.Text.Json;
 using TestTokyWebAPI.Hubs;
 using TestTokyWebAPI.Model;
+using TestTokyWebAPI.Model.Request;
 
 namespace TestTokyWebAPI.Controllers
 {
@@ -19,11 +20,11 @@ namespace TestTokyWebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Call([FromBody] BusinessTarget businessTarget)
+        public IActionResult Call([FromBody] MakeCallRequestDto dto)
         {
             try
             {
-                string jsonToAngular = JsonSerializer.Serialize(businessTarget);
+                string jsonToAngular = JsonSerializer.Serialize(dto);
                 _telephonyHubContex.Clients.All.SendAsync("CallLeadOnFront", jsonToAngular);//lo enviamos a el hub
                 return Ok();
             }

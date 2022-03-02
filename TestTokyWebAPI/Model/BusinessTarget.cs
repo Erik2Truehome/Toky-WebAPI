@@ -2,7 +2,7 @@
 {
     public class BusinessTarget
     {
-        public string LeadPhone { get; set; }
-        public string AgentEmail { get; set; }   
+        public Lead Lead { get; set; }
+        public Agent AgentAssigned { get; set; }   
     }
 }

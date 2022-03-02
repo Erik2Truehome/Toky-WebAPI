@@ -24,15 +24,18 @@ namespace TestTokyWebAPI
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddSignalR();
+
             services.AddCors(options =>
             {
-                options.AddPolicy("TodosPermitidos", builder => {
-                    builder.AllowAnyHeader();//todos las cabeceras
-                    builder.AllowAnyMethod();//todos los metodos https, get, post, put, etc
-                    builder.SetIsOriginAllowed((Host)=>true);   //todos los dominios
-                    builder.AllowCredentials();//todas las credenciales
-                    //builder.AllowAnyOrigin();// creo que con este bastaba
-                });
+                options.AddPolicy("TodosPermitidos",
+                    builder =>
+                    {
+                        builder.AllowAnyHeader();//todos las cabeceras
+                        builder.AllowAnyMethod();//todos los metodos https, get, post, put, etc
+                        builder.SetIsOriginAllowed((Host) => true);   //que permita todos los dominios .. pero investiga que es esto
+                        builder.AllowCredentials();//permita todas las credenciales
+                                                   //builder.AllowAnyOrigin();// creo que con este bastaba y ya no era necesario poner todo lo demas.. investiga mas al respecto
+                    });
 
             });
         }
@@ -54,19 +57,19 @@ namespace TestTokyWebAPI
 
             app.MapControllers();
 
-            app.UseRouting();
             app.UseCors("TodosPermitidos");
+            app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                //Esto lo comento porque esto es para los controller REST Api 
-                //pero parece que para NET 6 ya no es necesario
-
-                //endpoints.MapControllerRoute(
+                //Esto lo comento porque esto es para los controllers REST Api 
+                //pero parece que para NET 6 ya no es necesario y el NET 6 lo asume por defecto
+                /*endpoints.MapControllerRoute(
                 //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+
                 endpoints.MapHub<TelephonyHub>("/hub/Telephony");   //-> https://localhost:7292/hub/telephony
             });
 
