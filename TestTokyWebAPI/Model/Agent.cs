@@ -12,6 +12,6 @@
         //estos ulitmos 3 son opcionales
         public string IvrPhone { get; set; }
         public string ImageUrl { get; set; }
-        public Telephone TelephoneForwarding { get; set; }
+        public Telephone? TelephoneForwarding { get; set; }
     }
 }
