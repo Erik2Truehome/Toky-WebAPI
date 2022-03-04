@@ -1,3 +1,6 @@
+
+////////////////////
+
 {
 	"agent":{
 		"idassignator":"misael@truehome.com.mx",
@@ -14,7 +17,7 @@
 		"name":"Erik",
 		"lastname":"Montes",
 		"telephone":{
-			"countrycode":"+52",
+			"countrycode":"52",
 			"number":"5530396748"
 		}
 	}

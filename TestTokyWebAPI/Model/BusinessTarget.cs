@@ -3,6 +3,6 @@
     public class BusinessTarget
     {
         public Lead Lead { get; set; }
-        public Agent AgentAssigned { get; set; }   
+        public Agent Agent { get; set; }   
     }
 }

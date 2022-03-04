@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Text.Json;
+using TestTokyWebAPI.constant;
 using TestTokyWebAPI.Hubs;
 using TestTokyWebAPI.Model;
 using TestTokyWebAPI.Model.Request;
@@ -24,13 +25,25 @@ namespace TestTokyWebAPI.Controllers
         {
             try
             {
-                string jsonToAngular = JsonSerializer.Serialize(dto);
+                BusinessTarget businessTarget = new BusinessTarget
+                {
+                    Agent = dto.Agent,
+                    Lead = dto.Lead
+                };
+
+                Assignment assignment = new Assignment(555, businessTarget);
+
+                string jsonToAngular = JsonSerializer.Serialize(assignment);
                 _telephonyHubContex.Clients.All.SendAsync("CallLeadOnFront", jsonToAngular);//lo enviamos a el hub
-                return Ok();
+
+                assignment.Status = AssignmentStatus.CONTACTED;
+                string jsonToAssignator= JsonSerializer.Serialize(assignment);
+
+                return StatusCode(200, jsonToAssignator);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new {errorMsg= ex.Message });
+                return StatusCode(500, new { errorMsg = ex.Message });
             }
         }
     }
